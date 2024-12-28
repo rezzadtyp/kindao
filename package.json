@@ -1,0 +1,23 @@
+{
+  "name": "kindao",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon src/bot.ts",
+    "start": "npm run build && node dist/bot.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.1.0",
+    "dotenv": "^16.4.7",
+    "telegraf": "^4.16.3",
+    "telegraf-session-local": "^2.1.1",
+    "viem": "^2.21.57"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "nodemon": "^3.1.9",
+    "prisma": "^6.1.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

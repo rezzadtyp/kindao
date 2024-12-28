@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Wallet {
+  id              String         @id @default(uuid())
+  address         String         @unique
+  privateKey      String
+  createdAt       DateTime       @default(now())
+  walletHolding   WalletHolding? @relation("WalletToWalletHolding")
+  walletHoldingId String?
+  group           Group?         @relation("GroupToWallet")
+  groupUser       GroupUser?     @relation("GroupUserToWallet")
+
+  @@map("wallets")
+}
+
+model WalletHolding {
+  id        String   @id @default(uuid())
+  walletId  String   @unique
+  wallet    Wallet   @relation("WalletToWalletHolding", fields: [walletId], references: [id])
+  chainId   Int
+  address   String
+  amount    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("wallet_holdings")
+}
+
+model Group {
+  id         String     @id @default(uuid())
+  telegramId String     @unique
+  walletId   String?    @unique
+  wallet     Wallet?    @relation("GroupToWallet", fields: [walletId], references: [id])
+  chainId    Int
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  deletedAt  DateTime?
+  groupUser  GroupUser? @relation("GroupToGroupUser")
+
+  @@map("groups")
+}
+
+model GroupUser {
+  id         String   @id @default(uuid())
+  groupId    String   @unique
+  group      Group    @relation("GroupToGroupUser", fields: [groupId], references: [id])
+  telegramId String
+  walletId   String   @unique
+  wallet     Wallet   @relation("GroupUserToWallet", fields: [walletId], references: [id])
+  createdAt  DateTime @default(now())
+
+  @@map("group_users")
+}
