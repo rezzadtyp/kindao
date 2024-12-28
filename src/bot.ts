@@ -5,9 +5,16 @@ import { currentChain } from "./commands/currentChain";
 import { deposit } from "./commands/deposit";
 import buyWizard from "./scenes/buyWizard";
 import sellWizard from "./scenes/sellWizard";
+import { holdings } from "./commands/holdings";
+import { myChatMember } from "./events/my-chat-member";
 
 export const bot = new Telegraf<Scenes.WizardContext>(config.telegramToken);
 
+// EVENTS
+myChatMember(bot);
+
+// COMMANDS
+holdings(bot);
 switchChain(bot);
 currentChain(bot);
 deposit(bot);
