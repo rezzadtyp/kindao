@@ -7,6 +7,9 @@ import buyWizard from "./scenes/buyWizard";
 import sellWizard from "./scenes/sellWizard";
 import { holdings } from "./commands/holdings";
 import { myChatMember } from "./events/my-chat-member";
+import { refresh } from "./actions/refresh";
+import { switchId } from "./actions/switch-id";
+import { depositDone } from "./actions/deposit-done";
 
 export const bot = new Telegraf<Scenes.WizardContext>(config.telegramToken);
 
@@ -18,6 +21,11 @@ holdings(bot);
 switchChain(bot);
 currentChain(bot);
 deposit(bot);
+
+// ACTIONS
+refresh(bot);
+depositDone(bot);
+switchId(bot);
 
 const stage = new Scenes.Stage<Scenes.WizardContext>([buyWizard, sellWizard]);
 bot.use(session());

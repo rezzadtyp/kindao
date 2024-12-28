@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
@@ -33,7 +33,7 @@ model WalletHolding {
   wallet    Wallet   @relation("WalletToWalletHolding", fields: [walletId], references: [id])
   chainId   Int
   address   String
-  amount    Int
+  amount    BigInt
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
