@@ -12,9 +12,9 @@ interface MyWizardSession extends Scenes.WizardSessionData {
 type MyContext = Scenes.WizardContext<MyWizardSession>;
 
 const chains = [
-  { id: "ethereum", name: "Ethereum" },
-  { id: "bsc", name: "BSC" },
-  { id: "polygon", name: "Polygon" },
+  { id: "polygon", name: "polygonZkEvmCardona" },
+  // { id: "bsc", name: "BSC" },
+  // { id: "polygon", name: "Polygon" },
 ];
 
 const amounts = ["0.1", "0.5", "1.0", "2.0", "Custom"];

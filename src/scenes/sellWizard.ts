@@ -50,7 +50,7 @@ const sellWizard = new Scenes.WizardScene<MyContext>(
 
     // Show token info
     await ctx.reply(
-      `Current PEPE Balance: \nAddress: ${tokenAddress}\nChain: ${chain.name}\n`
+      `Current Balance: \nAddress: ${tokenAddress}\nChain: ${chain.name}\n`
     );
 
     // New keyboard layout
@@ -59,16 +59,9 @@ const sellWizard = new Scenes.WizardScene<MyContext>(
         [{ text: "Cancel", callback_data: "cancel" }],
         [{ text: "✅ Swap", callback_data: "swap" }],
         [
-          { text: "SELL 100 PEPE", callback_data: "100" },
-          { text: "SELL 50 PEPE", callback_data: "50" },
-          { text: "SELL X PEPE", callback_data: "custom" },
-        ],
-        [
-          Markup.button.url(
-            "View PEPE on Blockscout",
-            // TODO: use blockscout?
-            `https://eth-sepolia.blockscout.com/address/${tokenAddress}`
-          ),
+          { text: "SELL 100", callback_data: "100" },
+          { text: "SELL 50", callback_data: "50" },
+          { text: "SELL X", callback_data: "custom" },
         ],
       ],
     };
@@ -140,8 +133,8 @@ async function handleSellOrder(ctx: MyContext, amount: string) {
     `━━━━━━━━━━━━━━━\n\n` +
     `🔗 *Network:* ${selectedChain}\n` +
     `🪙 *Token:* \`${tokenAddress}\`\n` +
-    `💰 *Amount:* ${amount} PEPE\n` +
-    `💵 *Balance:* 0.0 PEPE\n\n` +
+    `💰 *Amount:* ${amount}\n` +
+    `💵 *Balance:* 0.0\n\n` +
     `━━━━━━━━━━━━━━━`;
 
   await ctx.reply(orderSummary, {

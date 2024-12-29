@@ -20,7 +20,7 @@ export const deposit = (bot: Telegraf<Scenes.WizardContext>) => {
       });
 
       await ctx.reply(
-        `🏦 Your deposit address on Sepolia:\n\n` +
+        `🏦 Your deposit address on Polygon:\n\n` +
           `\`${user.wallet.address}\`\n\n` +
           `💰 Balance: ${formatEther(balance)} ${
             chain.nativeCurrency.symbol
